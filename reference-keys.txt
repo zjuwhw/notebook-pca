@@ -1,6 +1,7 @@
 preface
-getting-started
 introduction
+geting-started
+introduction-1
 a-hypothetical-example
 characteristics-roots-and-vectors
 the-method-of-principal-components

@@ -1,0 +1,5 @@
+# Introduction
+
+The method of principal components: linear transformation: correlated variables -> uncorrelated variables
+
+Multidimensional scaling, preference, dominance, scaling, singular value decomposition (chapter 10)
