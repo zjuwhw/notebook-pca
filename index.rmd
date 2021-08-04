@@ -1,0 +1,3 @@
+# Preface
+
+This is a notebook for reading the book [A User's Guide to Principal Components (1st edition)](https://www.amazon.com/Users-Guide-Principal-Components/dp/0471471348).

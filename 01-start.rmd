@@ -1,0 +1,15 @@
+# Getting Started
+
+## Introduction
+
+## A Hypothetical Example
+
+## Characteristics Roots and Vectors
+
+## The Method of Principal Components
+
+## Some Properties of Principal Components
+
+## Scaling of Characteristic Vectors
+
+## Using Principal Components in Quality Control

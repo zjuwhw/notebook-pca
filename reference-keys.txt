@@ -1,0 +1,9 @@
+preface
+getting-started
+introduction
+a-hypothetical-example
+characteristics-roots-and-vectors
+the-method-of-principal-components
+some-properties-of-principal-components
+scaling-of-characteristic-vectors
+using-principal-components-in-quality-control
