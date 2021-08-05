@@ -251,18 +251,61 @@ For this example,</p>
 <p>So the <span class="math inline">\(\pmb{u}\)</span> matrix:</p>
 <p><span class="math display">\[\pmb{u} = \begin{bmatrix}\pmb{u}_1 &amp;  \pmb{u}_2\end{bmatrix} = \begin{bmatrix}0.7236 &amp; -0.6902 \\ 0.6902 &amp; 0.7236  \end{bmatrix}\]</span></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="geting-started.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">### we can use R function eigen() to eigen-decomposite the variance-covariance matrix</span></span>
-<span id="cb12-2"><a href="geting-started.html#cb12-2" aria-hidden="true" tabindex="-1"></a>eigen <span class="ot">=</span> <span class="fu">eigen</span>(<span class="fu">var</span>(x))</span></code></pre></div>
+<span id="cb12-2"><a href="geting-started.html#cb12-2" aria-hidden="true" tabindex="-1"></a>eigen <span class="ot">=</span> <span class="fu">eigen</span>(<span class="fu">var</span>(x)); eigen</span></code></pre></div>
+<pre><code>## eigen() decomposition
+## $values
+## [1] 1.4464743 0.0863828
+## 
+## $vectors
+##            [,1]       [,2]
+## [1,] -0.7236248  0.6901936
+## [2,] -0.6901936 -0.7236248</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="geting-started.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">### another R function prcomp()</span></span>
+<span id="cb14-2"><a href="geting-started.html#cb14-2" aria-hidden="true" tabindex="-1"></a>prcomp <span class="ot">=</span> <span class="fu">prcomp</span>(x);prcomp</span></code></pre></div>
+<pre><code>## Standard deviations (1, .., p=2):
+## [1] 1.2026946 0.2939095
+## 
+## Rotation (n x k) = (2 x 2):
+##           PC1        PC2
+## x1 -0.7236248 -0.6901936
+## x2 -0.6901936  0.7236248</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="geting-started.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">### the standard deviation prcomp$sdev is the square root of eigenvalues</span></span>
+<span id="cb16-2"><a href="geting-started.html#cb16-2" aria-hidden="true" tabindex="-1"></a>prcomp<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 1.4464743 0.0863828</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="geting-started.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="do">### the pca$rotation is the egienvectors</span></span>
+<span id="cb18-2"><a href="geting-started.html#cb18-2" aria-hidden="true" tabindex="-1"></a>prcomp<span class="sc">$</span>rotation</span></code></pre></div>
+<pre><code>##           PC1        PC2
+## x1 -0.7236248 -0.6901936
+## x2 -0.6901936  0.7236248</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="geting-started.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">### the pca$x is the principal component variables</span></span>
+<span id="cb20-2"><a href="geting-started.html#cb20-2" aria-hidden="true" tabindex="-1"></a>prcomp<span class="sc">$</span>x</span></code></pre></div>
+<pre><code>##               PC1         PC2
+##  [1,] -0.48313549  0.50653737
+##  [2,] -0.15141121 -0.42080238
+##  [3,]  0.21708744  0.20705807
+##  [4,]  0.14806809  0.27942055
+##  [5,] -2.26545250 -0.08789182
+##  [6,] -1.27577965 -0.11129370
+##  [7,]  1.76894451  0.02890185
+##  [8,]  0.84494789 -0.16144059
+##  [9,]  0.34175365 -0.50319424
+## [10,]  0.56552734 -0.01337250
+## [11,] -0.63788982 -0.05564685
+## [12,]  1.26909340 -0.17146997
+## [13,] -2.04502193  0.26054808
+## [14,]  0.06567623 -0.21374432
+## [15,]  1.63759205  0.45639048</code></pre>
 <p>The <span class="math inline">\(\pmb{u}\)</span> matrix is orthonormal, which means</p>
 <p><span class="math display">\[\pmb{u}_1^T\pmb{u}_1=1, \pmb{u}_2^T\pmb{u}_2=1\text{, and }\pmb{u}_1^T\pmb{u}_2=0\]</span></p>
 <p>Geometrically, it is a principle axis rotation. The elements of the characteristic vectors are the direction cosines of the new axes related to the old.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="geting-started.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="at">byrow=</span>T))</span>
-<span id="cb13-2"><a href="geting-started.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1, x2, <span class="at">main=</span><span class="st">&quot;original data&quot;</span>)</span>
-<span id="cb13-3"><a href="geting-started.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1<span class="sc">-</span><span class="fu">mean</span>(x1), x2<span class="sc">-</span><span class="fu">mean</span>(x2), <span class="at">main=</span><span class="st">&quot;centered data&quot;</span>)</span>
-<span id="cb13-4"><a href="geting-started.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1<span class="sc">-</span><span class="fu">mean</span>(x1), x2<span class="sc">-</span><span class="fu">mean</span>(x2), <span class="at">main=</span><span class="st">&quot;new axis 1&quot;</span>)</span>
-<span id="cb13-5"><a href="geting-started.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="do">### slope is tangent, first element of eigenvector is cosine</span></span>
-<span id="cb13-6"><a href="geting-started.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>eigen<span class="sc">$</span>vectors[<span class="dv">1</span>,<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2-1</span>));<span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>);<span class="fu">abline</span>(<span class="at">v=</span><span class="dv">0</span>)  </span>
-<span id="cb13-7"><a href="geting-started.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1<span class="sc">-</span><span class="fu">mean</span>(x1), x2<span class="sc">-</span><span class="fu">mean</span>(x2), <span class="at">main=</span><span class="st">&quot;new axis 2&quot;</span>)</span>
-<span id="cb13-8"><a href="geting-started.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="sc">-</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>eigen<span class="sc">$</span>vectors[<span class="dv">1</span>,<span class="dv">2</span>]<span class="sc">^</span><span class="dv">2-1</span>));<span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>);<span class="fu">abline</span>(<span class="at">v=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="geting-started.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="at">byrow=</span>T))</span>
+<span id="cb22-2"><a href="geting-started.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1, x2, <span class="at">main=</span><span class="st">&quot;original data&quot;</span>)</span>
+<span id="cb22-3"><a href="geting-started.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1<span class="sc">-</span><span class="fu">mean</span>(x1), x2<span class="sc">-</span><span class="fu">mean</span>(x2), <span class="at">main=</span><span class="st">&quot;centered data&quot;</span>)</span>
+<span id="cb22-4"><a href="geting-started.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1<span class="sc">-</span><span class="fu">mean</span>(x1), x2<span class="sc">-</span><span class="fu">mean</span>(x2), <span class="at">main=</span><span class="st">&quot;new axis 1&quot;</span>)</span>
+<span id="cb22-5"><a href="geting-started.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="do">### slope is tangent, first element of eigenvector is cosine</span></span>
+<span id="cb22-6"><a href="geting-started.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>eigen<span class="sc">$</span>vectors[<span class="dv">1</span>,<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2-1</span>));<span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>);<span class="fu">abline</span>(<span class="at">v=</span><span class="dv">0</span>)  </span>
+<span id="cb22-7"><a href="geting-started.html#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1<span class="sc">-</span><span class="fu">mean</span>(x1), x2<span class="sc">-</span><span class="fu">mean</span>(x2), <span class="at">main=</span><span class="st">&quot;new axis 2&quot;</span>)</span>
+<span id="cb22-8"><a href="geting-started.html#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="sc">-</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>eigen<span class="sc">$</span>vectors[<span class="dv">1</span>,<span class="dv">2</span>]<span class="sc">^</span><span class="dv">2-1</span>));<span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>);<span class="fu">abline</span>(<span class="at">v=</span><span class="dv">0</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="the-method-of-principal-components" class="section level2" number="3.4">

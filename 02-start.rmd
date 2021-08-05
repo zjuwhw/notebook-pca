@@ -100,7 +100,15 @@ $$\pmb{u} = \begin{bmatrix}\pmb{u}_1 &  \pmb{u}_2\end{bmatrix} = \begin{bmatrix}
 
 ```{r}
 ### we can use R function eigen() to eigen-decomposite the variance-covariance matrix
-eigen = eigen(var(x))
+eigen = eigen(var(x)); eigen
+### another R function prcomp()
+prcomp = prcomp(x);prcomp
+### the standard deviation prcomp$sdev is the square root of eigenvalues
+prcomp$sdev^2
+### the pca$rotation is the egienvectors
+prcomp$rotation
+### the pca$x is the principal component variables
+prcomp$x
 ```
 
 The $\pmb{u}$ matrix is orthonormal, which means
